@@ -1,0 +1,214 @@
+\documentclass[11pt,a4paper]{article}
+ 
+\usepackage[a4paper, top=8mm, bottom=16mm, left=18mm, right=18mm, headheight=3.7cm, headsep=8mm, footskip=12mm, includehead, includefoot]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{colortbl}
+\definecolor{rowhighlight}{HTML}{FFF2CC}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{parskip}
+ 
+ 
+\setmainfont{Arial}
+ 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{4pt}
+ 
+\newcommand{\mpheadercontent}{%
+  \begin{minipage}[t]{0.58\textwidth}
+    \raggedright\vspace{0pt}%
+    {\small ManpowerGroup Services India Pvt. Ltd.}\\[-1pt]
+    {\small Vatika City Point, 6\textsuperscript{th} Floor,}\\[-1pt]
+    {\small MG Road, Sector 25,}\\[-1pt]
+    {\small Gurgaon - 122002}\\[4pt]
+    {\small CIN - U74910DL1997PTC085591}\\[4pt]
+    {\small T : +91 - 11 - 6649 7500}\\[-1pt]
+    {\small www.manpowergroup.com.in}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.36\textwidth}
+    \raggedleft\vspace{0pt}%
+    \BLOCK{if logo_path}%
+    \includegraphics[width=2.6cm]{\VAR{logo_path}}%
+    \BLOCK{endif}%
+  \end{minipage}%
+}
+ 
+\newcommand{\mpfootercontent}{%
+  \tiny Regd Office: SCO No A-1A, 1st Floor, Gobind Mansion, H-Block, Indra Palace, Connaught Circus, New Delhi - 110001\\[1pt]
+  CIN - U74910DL1997PTC085591%
+}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\mpheadercontent}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\mpfootercontent}
+\renewcommand{\footrulewidth}{0pt}
+ 
+\newcommand{\offerSignatureBlock}[2]{%
+\noindent\textbf{For ManpowerGroup Services India Pvt Ltd.}
+ 
+\vspace{0.1cm}
+ 
+\noindent
+\begin{minipage}[t]{0.45\textwidth}
+  \raggedright\vspace{0pt}
+  \begin{minipage}[t][1.5cm][b]{\linewidth}
+  % \centering
+  #1%
+  \end{minipage}\\[2pt]
+  \rule{4cm}{0.4pt}\\[2pt]
+  Signature\\
+  \textbf{Authorized Signature}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+  \centering\vspace{0pt}
+  \begin{minipage}[t][1.5cm][b]{\linewidth}
+  % \centering
+  #2%
+  \end{minipage}\\[2pt]
+  \rule{4cm}{0.4pt}\\[2pt]
+  Signature\\
+  \textbf{Accepted By}\\
+  \textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}
+\end{minipage}%
+}
+ 
+\newcommand{\sealimg}{%
+\BLOCK{if default_signatory_for_letter}%
+\includegraphics[height=2cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+\BLOCK{endif}%
+}
+ 
+\newcommand{\candsigimg}{%
+\BLOCK{if Onb_Mgr_Declaration_Signature}%
+\includegraphics[height=2cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
+\BLOCK{endif}%
+}
+ 
+\begin{document}
+ 
+ 
+\noindent \textbf{\VAR{CURR_DATE}}
+ 
+\vspace{0.3cm}
+ 
+\noindent \textbf{\VAR{Offer_First_Name}} \textbf{\VAR{Offer_Mgr_Middle_Name}} \textbf{\VAR{Offer_Last_Name}}
+ 
+% \vspace{0.3cm}
+ 
+\noindent \textbf{\VAR{OfferedLocationTitle}}
+ 
+\vspace{0.3cm}
+ 
+\noindent\textbf{Subject: Offer for fixed-term contract}
+ 
+\vspace{0.5cm}
+ 
+\noindent Dear \textbf{\VAR{Offer_First_Name}} \textbf{\VAR{Offer_Mgr_Middle_Name}} \textbf{\VAR{Offer_Last_Name}},
+ 
+\vspace{0.3cm}
+With reference to your request for appointment with ManpowerGroup Services India Pvt.\ Ltd., we have
+pleasure in offering you the position of \textbf{\VAR{DesignationTitle}}, in our organization deputed at
+\textbf{\VAR{Client_Name}} on a fixed-term contract basis. The detail of the offer is as follows.
+ 
+\vspace{0.4cm}
+\BLOCK{set SalaryItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\noindent
+\begin{tabular}{@{}p{5.2cm}p{1cm}l@{}}
+  Start date of Assignment & : & \textbf{\VAR{Offer_Contract_Start_Date}}. \\[9pt]
+  End date of Assignment   & : & \textbf{\VAR{Offer_Contract_End_Date}}.   \\[9pt]
+  Annual CTC                & : & INR \textbf{\VAR{SalaryItem.column2Value}}/- \\
+\end{tabular}
+ 
+\vspace{0.3cm}
+
+A detailed salary annexure is provided in the attached Schedule-A for your reference.
+
+\vspace{0.3cm}
+Any statutory dues like PF, ESI, Bonus etc., if applicable, will be paid/ deducted as per law. All taxes
+will be deducted as applicable by law.
+
+\vspace{0.3cm}
+A detailed appointment letter would be issued to you upon your joining.
+ 
+\vspace{0.4cm}
+ 
+\offerSignatureBlock{\sealimg}{\candsigimg}
+ 
+\newpage
+ 
+ 
+\vspace*{0.3cm}
+ 
+\begin{center}
+\large\textbf{Schedule A (Confidential)}
+\end{center}
+ 
+\vspace{0.15cm}
+ 
+\noindent\textbf{Assignment details and component-wise salary breakup}
+ 
+\vspace{0.35cm}
+ 
+\noindent
+\begin{tabular}{@{}p{5.2cm}p{1cm}l@{}}
+  Client                    & : & \textbf{\VAR{Client_Name}} \\[6pt]
+  Place of Assignment       & : & \textbf{\VAR{OfferedLocationTitle}} \\[6pt]
+  Start Date of Assignment  & : & \textbf{\VAR{Offer_Contract_Start_Date}} \\
+\end{tabular}
+ 
+\vspace{0.4cm}
+ 
+\renewcommand{\arraystretch}{1.25}
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+\noindent
+\begin{tabular}{|p{6.0cm}|>{\raggedleft\arraybackslash}p{2.0cm}|>{\raggedleft\arraybackslash}p{3.9cm}|>{\raggedleft\arraybackslash}p{3.9cm}|}
+  \hline
+   & & \textbf{\VAR{OfferedLocationTitle}} & \\
+  \hline
+  \small\textbf{Salary Components} & & \small\textbf{Monthly Amount(Rs.)} & \small\textbf{Annually Amount(Rs.)} \\
+  \hline
+  \BLOCK{for item in EarningHeadersTable}
+  \BLOCK{if item.column1Value != '0' and item.column2Value != '0'}
+  \VAR{item.SalaryHeaderTitle} & \BLOCK{if item.rate is defined}\VAR{item.rate}\%\BLOCK{endif} & \VAR{item.column1Value} & \VAR{item.column2Value} \\
+  \hline
+  \BLOCK{endif}
+  \BLOCK{endfor}
+  \rowcolor{rowhighlight}
+  \textbf{TOTAL CTC} & & \textbf{\VAR{SalaryItem.column1Value}} & \textbf{\VAR{SalaryItem.column2Value}} \\
+  \hline
+  \textbf{For Employee} & & & \\
+  \hline
+  \BLOCK{for item in DeductionHeadersTable}
+  \BLOCK{if item.column1Value != '0' and item.column2Value != '0'}
+  \VAR{item.SalaryHeaderTitle} & \BLOCK{if item.rate is defined}\VAR{item.rate}\%\BLOCK{endif} & \VAR{item.column1Value} & \VAR{item.column2Value} \\
+  \hline
+  \BLOCK{endif}
+  \BLOCK{endfor}
+  \rowcolor{rowhighlight}
+  \textbf{TAKE HOME} & & \textbf{\VAR{TakeHomeItem.column1Value}} & \textbf{\VAR{TakeHomeItem.column2Value}} \\
+  \hline
+\end{tabular}
+ 
+\vspace{0.35cm}
+ 
+\noindent\textit{Note: Income Tax, Professional Tax and any other Statutory Deductions are as applicable
+by law.}\\
+Kindly provide your acceptance on the above.
+ 
+\vspace{0.6cm}
+ 
+\noindent\textbf{Associate Signature:} \candsigimg\\[4pt]
+\noindent\textbf{Associate Full Name:} \underline{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}
+ 
+\end{document}
+ 
+ 

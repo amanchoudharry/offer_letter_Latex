@@ -1,0 +1,236 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper, top=8mm, bottom=14mm, left=18mm, right=18mm, headheight=2.6cm, headsep=5mm, includehead]{geometry}
+\usepackage{fontspec}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{parskip}
+\usepackage[normalem]{ulem}
+\usepackage[table]{xcolor}
+\setlength{\arrayrulewidth}{0.8pt}   % thicker borders (important)
+\setlength{\tabcolsep}{6pt}          % optional spacing control
+
+\setmainfont{Arial}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcommand{\mpheadercontent}{%
+  \begin{minipage}[t]{0.58\textwidth}
+    \raggedright\vspace{0pt}%
+    {\small ManpowerGroup Services India Pvt. Ltd.}\\[-1pt]
+    {\small 1-8-384 \& 385, 2nd Floor,}\\[-1pt]
+    {\small Gowra Grand, S.P. Road, Begumpet,}\\[-1pt]
+    {\small Hyderabad -- 500003, Telangana.}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.36\textwidth}
+    \raggedleft\vspace{0pt}%
+    \BLOCK{if logo_path}%
+    \includegraphics[width=2.4cm]{\VAR{logo_path}}%
+    \BLOCK{endif}%
+  \end{minipage}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\mpheadercontent}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\sealimg}{%
+\BLOCK{if default_signatory_for_letter}%
+\includegraphics[height=1.6cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+\BLOCK{endif}%
+}
+
+\newcommand{\candsig}{\VAR{Onb_Mgr_Declaration_Signature}}
+
+\begin{document}
+
+\begin{flushright}
+\textbf{Date: \VAR{CURR_DATE}}
+\end{flushright}
+
+\vspace{0.3cm}
+
+\noindent\textbf{Name: \hspace{0.3cm}\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name},}
+
+\vspace{0.3cm}
+
+\noindent\textbf{Subject: -- } Offer Letter for Fixed Term Contract Assignment
+
+\vspace{0.3cm}
+
+\noindent\textbf{Dear \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name},}
+
+\vspace{0.3cm}
+
+Congratulations on your new assignment with \textbf{Manpower Group Services India Pvt Ltd.}
+
+\vspace{0.3cm}
+
+With reference to your interview with us, we take pleasure in offering you the position of \textbf{\VAR{DesignationTitle}} in this regard, you will be based at \textbf{\VAR{Offered_Location_City}}, and you will be assigned to \textbf{Electronic Arts Games (India) Private Limited.}
+
+\vspace{0.4cm}
+
+\noindent
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\begin{tabular}{@{}p{6cm}p{1cm}l@{}}
+  \textbf{Start date of Assignment on or} & \textbf{:} & \textbf{\VAR{Offer_Contract_Start_Date}} \\[9pt]
+  \textbf{Before End date of Assignment}  & \textbf{:} & \textbf{\VAR{Offer_Contract_End_Date}}   \\[9pt]
+  \textbf{Monthly CTC}                    & \textbf{:} & \textbf{INR \VAR{TotalItem.column1Value}/-} \\
+\end{tabular}
+
+\vspace{0.3cm}
+
+
+Any statutory dues like PF, ESI, Bonus etc, if applicable, will be Paid / Deducted as per law. All taxes will be deducted as applicable by law.
+
+\vspace{0.3cm}
+
+Appointment letter and other terms and conditions of the contract would be provided after acceptance of the offer letter, received by Manpower.
+
+\vspace{0.3cm}
+
+Kindly send the signed and accepted duplicate copy of the offer letter within 2 days, failing which it will be treated that this offer stands withdrawn automatically.
+
+\vspace{0.6cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedright\vspace{0pt}
+  \textbf{For ManpowerGroup Services India Pvt. Ltd.}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedleft\vspace{0pt}
+  \textbf{Signature}
+\end{minipage}
+
+\vspace{0.1cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedright\vspace{0pt}
+  \sealimg\\[2pt]
+  \textbf{MADHURI MALPATHAK}\\[-1pt]
+  {\small Associate Director- Staffing Operations \& CoE}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedleft\vspace{0pt}
+  \candsig
+\end{minipage}
+
+\vspace{0.25cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedright\vspace{0pt}
+  \textbf{Signature}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedleft\vspace{0pt}
+  \textbf{Accepted by}\\
+  \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}
+\end{minipage}
+
+\newpage
+
+\begin{center}
+\Large\textbf{\uline{Annexure}}
+\end{center}
+
+\vspace{0.1cm}
+
+
+
+\renewcommand{\arraystretch}{1.25}
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+\begin{center}
+\begin{tabular}{|p{8.5cm}|>{\raggedleft\arraybackslash}p{6.5cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Salary Structure}} \\
+\hline
+\textbf{\underline{Particulars}} & \multicolumn{1}{c|}{\textbf{\underline{Amount (Rs.)}}} \\
+\hline
+\BLOCK{for item in EarningHeadersTable}
+\BLOCK{if item.column1Value != '0' and item.column1Value != 'NaN'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\cellcolor{yellow!60}\textbf{Total CTC} & \cellcolor{yellow!60}\textbf{\VAR{TotalItem.column1Value}} \\
+\hline
+\textbf{\underline{for Employee}} & \\
+\hline
+\BLOCK{for item in DeductionHeadersTable}
+\BLOCK{if item.column1Value != '0' and item.column1Value != 'NaN'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\cellcolor{yellow!60}\textbf{TAKE HOME} & \cellcolor{yellow!60}\textbf{\VAR{TakeHomeItem.column1Value}} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.6cm}
+
+Income tax and Professional tax as applicable will be deducted. All taxes will be deducted as applicable by law. Your salary is strictly confidential.
+
+\vspace{0.3cm}
+
+As per the Manpower Notice Period Policies Associates (Employee) must serve 1 month notice period if they tends to Resign or leave the Organization for any reason.
+
+
+\vspace{0.2cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedright\vspace{0pt}
+  \textbf{For ManpowerGroup Services India Pvt. Ltd.}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedleft\vspace{0pt}
+  \textbf{Signature}
+\end{minipage}
+
+\vspace{0.1cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedright\vspace{0pt}
+  \sealimg\\[2pt]
+  \textbf{MADHURI MALPATHAK}\\[-1pt]
+  {\small Associate Director- Staffing Operations \& CoE}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedleft\vspace{0pt}
+  \candsig
+\end{minipage}
+
+\vspace{0.25cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedright\vspace{0pt}
+  \textbf{Signature}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedleft\vspace{0pt}
+  \textbf{Accepted by}\\
+  \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}
+\end{minipage}
+
+\end{document}

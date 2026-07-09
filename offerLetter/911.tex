@@ -1,0 +1,200 @@
+\documentclass[11pt,a4paper]{article}
+ 
+\usepackage[a4paper, top=8mm, bottom=8mm, left=18mm, right=18mm, headheight=2.6cm, headsep=5mm, footskip=16mm, includehead, includefoot]{geometry}
+\usepackage{fontspec}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{parskip}
+ 
+\setmainfont{Arial}
+ 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{4pt}
+\setlength{\emergencystretch}{2em}
+ 
+\definecolor{hlyellow}{HTML}{FFFF99}   % yellow highlight (empty separator row)
+ 
+\newcommand{\mpheadercontent}{%
+  \begin{minipage}[t]{0.66\textwidth}
+    \footnotesize\raggedright\vspace{0pt}%
+    ManpowerGroup Services India Pvt. Ltd.\\[-1pt]
+    Suit No A-1A, 1\textsuperscript{st} Floor, Gobind Mansion,\\[-1pt]
+    H-Block,Indra Palace, Connaught Circus,New Delhi -- 110001\\[-1pt]
+    CIN -- U74910DL 1997PTC085591
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.30\textwidth}
+    \raggedleft\vspace{0pt}%
+    \BLOCK{if logo_path}%
+    \includegraphics[width=2.6cm]{\VAR{logo_path}}%
+    \BLOCK{endif}%
+  \end{minipage}%
+}
+ 
+\newcommand{\mpfootercontent}{%
+  \footnotesize\centering
+  \textbf{Regd Office:}Suit No A-1A, 1\textsuperscript{st} Floor, Gobind Mansion, H-Block,,Indra Palace, Connaught Circus,New Delhi -- 110001\\
+  CIN -- U74910DL 1997PTC085591%
+}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\mpheadercontent}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\mpfootercontent}
+\renewcommand{\footrulewidth}{0pt}
+ 
+% Company seal / authorized-signatory image
+\newcommand{\sealimg}{%
+\BLOCK{if default_signatory_for_letter}%
+\includegraphics[height=1.8cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+\BLOCK{endif}%
+}
+ 
+% Candidate's accepted-signature image (placeholder token if none)
+\newcommand{\candsigimg}{%
+\BLOCK{if Onb_Mgr_Declaration_Signature }%
+\includegraphics[height=1.4cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
+\BLOCK{else}%
+Offer\_Accepted\_Signature%
+\BLOCK{endif}%
+}
+ 
+% Borderless signature block (page 1)
+\newcommand{\offerSignatureBlock}{%
+\noindent
+\begin{minipage}[t]{0.55\textwidth}
+  \raggedright\vspace{0pt}%
+  For ManpowerGroup Services India Pvt.\ Ltd.\\[2pt]
+  \sealimg\\[2pt]
+  \textbf{MADHURI MALPATHAK}\\
+  Associate Director- Staffing Operations \& CoE
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.40\textwidth}
+  \raggedleft\vspace{0pt}%
+  \textbf{Signature}\\[6pt]
+  \candsigimg
+\end{minipage}
+ 
+\vspace{0.7cm}
+ 
+\noindent
+\begin{minipage}[t]{0.50\textwidth}
+  \raggedright\textbf{Signature}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+  \raggedleft\textbf{Accepted by}\\[4pt]%
+  \textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}
+\end{minipage}%
+}
+ 
+\begin{document}
+ 
+\noindent\textbf{Date:} \VAR{CURR_DATE}
+ 
+\vspace{0.3cm}
+ 
+\noindent\textbf{Name:} \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}
+ 
+\vspace{0.3cm}
+ 
+\noindent\textbf{Subject:} OFFER FOR FIXED TERM CONTRACT
+ 
+\vspace{0.3cm}
+ 
+\RaggedRight
+With reference to your appointment with ManpowerGroup Services India Pvt.\ Ltd., We have pleasure in
+offering you the position of \textbf{\VAR{DesignationTitle}} with our client ``\textbf{\VAR{Client_Name}}'' on a Fixed Term Contract basis.
+ 
+\vspace{0.3cm}
+ 
+The detail of the offer is as follow
+ 
+\vspace{0.2cm}
+ 
+\noindent
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+\begin{tabular}{@{\hspace{1.4cm}}p{5cm}p{0.6cm}l@{}}
+  Start date of Assignment & : & \textbf{\VAR{Offer_Contract_Start_Date}} \\[8pt]
+  End date of Assignment   & : & \textbf{\VAR{Offer_Contract_End_Date}}   \\[8pt]
+  Location                 & : & \textbf{\VAR{OfferedLocationTitle}}       \\[8pt]
+  CTC / Month              & : & Rs.\ \textbf{\VAR{TotalItem.column1Value}} /- \\
+\end{tabular}
+ 
+\vspace{0.3cm}
+ 
+Any statutory dues like PF, ESI, Bonus etc, if applicable, will be Paid / Deducted as per law.
+ 
+All taxes will be deducted as applicable by law.
+ 
+Please refer the Annexure for details:
+ 
+This offer is contingent upon your liability to provide us/upload the copies of the documents as per
+joining kit.
+ 
+If you wish to accept this offer, kindly send the accepted copy of the same along with a copy of your
+accepted resignation letter or relieving letter (if applicable). In case the signed acceptance and required
+documents are not received by Manpower within 7 days of the offer date, Manpower at their discretion
+reserve their right to treat this offer as withdrawn automatically without further notice.
+ 
+\vspace{0.6cm}
+ 
+\offerSignatureBlock
+ 
+\newpage
+ 
+\vspace*{0.2cm}
+ 
+\begin{center}\textbf{Annexure}\end{center}
+ 
+\vspace{0.3cm}
+ 
+\renewcommand{\arraystretch}{1.2}
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+\begin{center}
+\begin{tabular}{|p{5.5cm}|>{\raggedleft\arraybackslash}p{4.75cm}|>{\raggedleft\arraybackslash}p{4.75cm}|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Salary Structure}} \\
+\hline
+\textbf{\underline{Particulars}} & \multicolumn{1}{c|}{\textbf{\underline{Monthly Amount (Rs.)}}} & \multicolumn{1}{c|}{\textbf{\underline{Annually Amount (Rs.)}}} \\
+\hline
+\BLOCK{for item in EarningHeadersTable}
+\BLOCK{if item.column1Value != '0' and item.column1Value != 'NaN'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} & \VAR{item.column2Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\cellcolor{yellow!60}\textbf{Total CTC} & \cellcolor{yellow!60}\textbf{\VAR{TotalItem.column1Value}} & \cellcolor{yellow!60}\textbf{\VAR{TotalItem.column2Value}} \\
+\hline
+\textbf{\underline{for Employee}} & & \\
+\hline
+\BLOCK{for item in DeductionHeadersTable}
+\BLOCK{if item.column1Value != '0' and item.column1Value != 'NaN'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} & \VAR{item.column2Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\cellcolor{yellow!60}\textbf{TAKE HOME} & \cellcolor{yellow!60}\textbf{\VAR{TakeHomeItem.column1Value}} & \cellcolor{yellow!60}\textbf{\VAR{TakeHomeItem.column2Value}} \\
+\hline
+\end{tabular}
+\end{center}
+ 
+\vspace{0.8cm}
+ 
+\noindent Signature\\
+Accepted By\\
+\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}\\
+Date: \VAR{CURR_DATE}
+ 
+\end{document}
+ 
+ 

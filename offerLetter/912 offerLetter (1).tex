@@ -1,0 +1,193 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper, top=5mm, bottom=8mm, left=18mm, right=18mm, headheight=4.0cm, headsep=6mm, footskip=24mm, includehead, includefoot]{geometry}
+\usepackage{fontspec}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{parskip}
+\usepackage{changepage}
+
+\setmainfont{Arial}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\tabcolsep}{4pt}
+\setlength{\emergencystretch}{2em}
+
+\definecolor{hlyellow}{HTML}{FFFF66}   % yellow highlight
+\definecolor{accent}{HTML}{E36C0A}     % orange for client name
+
+\newcommand{\mpheadercontent}{%
+  \begin{minipage}[t]{0.66\textwidth}
+    \footnotesize\raggedright\vspace{0pt}\bfseries%
+    ManpowerGroup Services India Pvt. Ltd.\\[-1pt]
+    Unit No. 4-A/I \& Unit No. 4-A/2,\\[-1pt]
+    4\textsuperscript{th} Floor, Plot No. 6, Uppal Plaza,\\[-1pt]
+    M-6, Jasola, New Delhi - 110025\\[-1pt]
+    CIN - U74910DL1997PTC085591\\[-1pt]
+    T: +91 -- 11 -- 6649 7500\\[-1pt]
+    F: +91 -- 11 -- 6649 7527\\[-1pt]
+    www.manpowergroup.co.in
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.30\textwidth}
+    \raggedleft\vspace{0pt}%
+    \BLOCK{if logo_path}%
+    \includegraphics[width=2.6cm]{\VAR{logo_path}}%
+    \BLOCK{endif}%
+  \end{minipage}%
+}
+
+% \newcommand{\mpfootercontent}{%
+%   \BLOCK{if footer_path}%
+%   \makebox[\textwidth]{\includegraphics[width=\textwidth,keepaspectratio]{\VAR{footer_path}}}%
+%   \BLOCK{else}%
+%   \small\thepage%
+%   \BLOCK{endif}%
+% }
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\mpheadercontent}
+\renewcommand{\headrulewidth}{0pt}
+% \fancyfoot[C]{\mpfootercontent}
+\renewcommand{\footrulewidth}{0pt}
+
+% Company seal / authorized-signatory image
+\newcommand{\sealimg}{%
+\BLOCK{if default_signatory_for_letter}%
+\includegraphics[height=1.8cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+\BLOCK{endif}%
+}
+
+% Candidate's accepted-signature image (placeholder token if none)
+\newcommand{\candsigimg}{%
+\BLOCK{if Onb_Mgr_Declaration_Signature}%
+\includegraphics[height=1.4cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
+\BLOCK{else}%
+Offer\_Accepted\_Signature%
+\BLOCK{endif}%
+}
+
+\begin{document}
+
+\begin{adjustwidth}{0.6cm}{0cm}
+
+\noindent\textbf{\VAR{CURR_DATE}}
+
+\vspace{0.3cm}
+
+\noindent To\\
+\textbf{Mr./Mrs \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}\\
+\textbf{\VAR{OfferedLocationTitle}}
+
+\vspace{0.3cm}
+
+\noindent Subject: OFFER FOR FIXED TERM CONTRACT
+
+\vspace{0.3cm}
+
+\noindent\textbf{Dear \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name},}
+
+\RaggedRight
+
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+We are pleased to offer you a position as ``\textbf{\VAR{DesignationTitle}}'' on a Fixed Term Contract basis at \textbf{Manpower
+Group Services India Pvt.\ Ltd.}, deployed with our client \textbf{\textcolor{accent}{\VAR{Client_Name}}} for a period of
+\textbf{\VAR{Offer_Contract_No_of_New_Months}} months beginning \textbf{\VAR{Offer_Contract_Start_Date}} till
+\textbf{\VAR{Offer_Contract_End_Date}.}
+
+You will be paid a monthly take-home salary of Rs.\ \textbf{\VAR{TakeHomeItem.column1Value}} per month, which includes
+Basic, HRA, and the salary breakup for the same is given below. Any statutory dues like PF, ESI, Bonus etc., if
+applicable, will be Paid / Deducted as per law. All taxes will be deducted as applicable by law.
+
+During this period your services are liable to be terminated or discontinued by giving 15-days' notice. No
+reason for such termination or discontinuation will be given by the management.
+
+Notice period of 30 days reciprocal is applicable as per the policy.
+
+At the time of joining, please bring with you (1) experience letter and relieving letter from your all-previous
+employer (2) last payslips from your most recent employer (3) your educational certificates and (4)
+photographs.
+
+\vspace{2pt}
+\noindent\colorbox{hlyellow}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\RaggedRight\textbf{Please note that the offer is contingent on successful completion of Background check and receiving good feedback from your references and you being able to produce the necessary documents on the date of joining.}}}
+\vspace{2pt}
+
+If you wish to accept this offer, kindly send the accepted copy of the same along with a copy of your
+accepted resignation letter or relieving letter (if applicable). In case the signed acceptance and required
+documents are not received by Manpower within 7 days of the offer date, Manpower at their discretion
+reserve their right to treat this offer as withdrawn automatically without further notice.
+
+\vspace{0.6cm}
+
+\noindent
+\begin{minipage}[b]{0.60\linewidth}
+  \raggedright
+  \sealimg\\[4pt]
+  \textbf{Signature}\\
+  \textbf{For Manpower Group Services India Pvt.\ Ltd.}
+\end{minipage}%
+\hfill
+\begin{minipage}[b]{0.38\linewidth}
+  \raggedleft \candsigimg
+\end{minipage}
+
+\end{adjustwidth}
+
+\newpage
+
+\begin{center}\textbf{Salary Structure}\end{center}
+
+\vspace{0.2cm}
+
+\renewcommand{\arraystretch}{1.25}
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+\noindent
+\begin{longtable}{|>{\raggedright\arraybackslash}p{8cm}|>{\raggedleft\arraybackslash}p{8cm}|}
+  \hline
+  Salary Structure & \textbf{New Structure} \\
+  \hline
+  \textbf{\underline{Particulars}} & \textbf{Amount (Rs.)} \\
+  \hline
+  \endhead
+  & \VAR{OfferedLocationTitle} \\
+  \hline
+  \BLOCK{for item in EarningHeadersTable}
+  \BLOCK{if item.column1Value != '0' and item.column1Value != 'NaN'}
+  \VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+  \hline
+  \BLOCK{endif}
+  \BLOCK{endfor}
+  \textbf{TOTAL CTC} & \textbf{\VAR{TotalItem.column1Value}} \\
+  \hline
+  \rowcolor{hlyellow} &  \\
+  \hline
+  \textbf{\underline{for Employee}} &  \\
+  \hline
+  \BLOCK{for item in DeductionHeadersTable}
+  \BLOCK{if item.column1Value != '0' and item.column1Value != 'NaN'}
+  \VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+  \hline
+  \BLOCK{endif}
+  \BLOCK{endfor}
+  \rowcolor{hlyellow}\textbf{TAKE HOME} & \textbf{\VAR{TakeHomeItem.column1Value}} \\
+  \hline
+\end{longtable}
+
+\vspace{0.3cm}
+
+\RaggedRight
+I agree to the above terms and conditions of my fixed term contract with Manpower Group Services India Pvt.\
+Ltd.
+
+\vspace{1.0cm}
+
+\hfill \candsigimg
+
+\end{document}
