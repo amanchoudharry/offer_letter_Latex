@@ -1,0 +1,651 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper, top=8mm, bottom=20mm, left=18mm, right=18mm, footskip=14mm, includefoot]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow} 
+\usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{hhline}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{longtable}
+\usepackage{parskip}
+\usepackage{seqsplit}
+\usepackage{lastpage}
+\usepackage{mfirstuc}
+
+% ─── Fonts ───────────────────────────────────────────────────────────────────
+\setmainfont{Arial}
+\IfFontExistsTF{FreeSans}{%
+  \newfontfamily{\inrfont}{FreeSans}[Scale=MatchLowercase]%
+  \newcommand{\rupee}{{\inrfont ₹}}%
+}{%
+  \newcommand{\rupee}{Rs.}%
+}
+
+% ─── Colors ──────────────────────────────────────────────────────────────────
+\definecolor{mpblue}{HTML}{C1D5C7}
+\definecolor{mpdark}{HTML}{6C6C6C}
+\definecolor{lightgray}{HTML}{EEEEEE}
+\definecolor{mplightgreen}{HTML}{7CB342}
+
+% ─── Layout ──────────────────────────────────────────────────────────────────
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{4pt}
+
+% ─── Reusable page header — logo left, description right ────────────────────
+\newcommand{\mpheader}{%
+  \noindent
+  \begin{minipage}[t]{0.25\textwidth}
+    \vspace{0pt}%
+    \BLOCK{if logo_path}%
+      \includegraphics[width=4.8cm]{\VAR{logo_path}}%
+    \BLOCK{endif}%
+  \end{minipage}%
+  \hspace{6cm}% Adjust this value to move the block further right or left
+  \begin{minipage}[t]{0.60\textwidth}
+    \vspace{0pt}%
+    \raggedright
+    {\small\textbf{ManpowerGroup Services India Private Ltd.}}\\[2pt]
+    {\small Suite No. A,1A, 1st Floor, Gobind Mansion,}\\[2pt]
+    {\small H\,-\,Block, Connaught Circus,}\\[2pt]
+    {\small New Delhi\,-\,110001}\\[2pt]
+    {\small T: 1800\,-\,419\,-\,4001}\\[2pt]
+    {\small\textcolor{mplightgreen}{www.manpoweronline.in}}
+  \end{minipage}%
+}
+
+% ─── Reusable page footer — company left / Associate Code center / Page right ─
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancyfoot[C]{%
+  \begin{minipage}{\textwidth}
+    \color{mpdark}\small
+    \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r@{}}
+      ManpowerGroup Services India Private Ltd. & Associate Code: \VAR{Onb_Employee_Code} & Page \thepage\ of 8 \\
+    \end{tabular*}\\[35pt]
+    \centering\footnotesize This letter is not valid if not signed by authorized signatory.
+  \end{minipage}%
+}
+
+\begin{document}
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  PAGE 1 — APPOINTMENT LETTER
+% ═════════════════════════════════════════════════════════════════════════════
+\mpheader
+
+\vspace{0.4cm}
+
+\noindent Date: \textbf{\VAR{CURR_DATE}}
+
+\vspace{0.5cm}
+
+\noindent
+\begin{tabular}{@{}p{3.2cm}@{}p{12cm}@{}}
+  \textbf{Name:}        & \textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}} \\[4pt]
+  \BLOCK{if PermAddressline1}%
+  \textbf{Address:}     & \textbf{\VAR{PermAddressline1} \VAR{PermAddressline2} \VAR{PermCity} \VAR{PermState} \VAR{PermCountry}} \\
+                        & \textbf{\VAR{PermPostalCode}.} \\[4pt]
+  \BLOCK{endif}%
+                        \textbf{Employee ID:} & \textbf{\VAR{Onb_Employee_Code}} \\ 
+\end{tabular}
+
+\vspace{0.6cm}
+
+\noindent\textbf{Subject: FIXED TERM CONTRACT}
+
+\vspace{0.4cm}
+
+\noindent\textbf{Dear \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name},}
+
+\vspace{0.2cm}
+
+With reference to your appointment with \textbf{ManpowerGroup Services India Pvt.~Ltd.}, we have pleasure
+in offering you the position of \textbf{\VAR{DesignationTitle}} in our organization on a Fixed Term Contract basis.
+The detail of the offer is as follow:
+
+\vspace{0.28cm}
+
+\BLOCK{set grossSalaryItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Gross Salary') | first}%
+\noindent\hspace{0.5cm}
+\begin{tabular}{@{}p{5.0 cm}@{}l@{}}
+  \textbf{Start date of Assignment} & \textbf{: \VAR{Offer_Contract_Start_Date}} \\[5pt]
+  \textbf{End date of Assignment}   & \textbf{: \VAR{Offer_Contract_End_Date}} \\[5pt]
+  \textbf{Gross Salary per month}   & \textbf{: INR \VAR{grossSalaryItem.column1Value} /-} \\
+\end{tabular}
+
+\vspace{0.3cm}
+
+Any statutory dues like PF, ESI, Bonus etc, if applicable, will be Paid / Deducted as per law. All
+taxes will be deducted as applicable by law.
+
+The terms and conditions of the contract and details of your salary break up are specified in Service
+Contract attached here to.
+
+Kindly send the accepted copy of the same and your PAN number to ManpowerGroup. In case the signed
+acceptance is not received by ManpowerGroup within 7 days of the offer date, ManpowerGroup reserves
+the right to withdraw the offer.
+
+\vspace{0.8cm}
+
+\noindent
+\begin{minipage}[t]{0.55\textwidth}
+  \vspace{0pt}
+  \textbf{For ManpowerGroup Services India Private Limited}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.38\textwidth}
+  \raggedleft\vspace{0pt}
+  \textbf{Signature}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\noindent
+\begin{minipage}[t]{0.55\textwidth}
+  \vspace{0pt}
+  \begin{minipage}[t][1.4cm][b]{\linewidth}
+  \BLOCK{if default_signatory_for_letter}%
+  \includegraphics[width=2.5cm,height=2cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+  \BLOCK{endif}%
+  \end{minipage}\\[2pt]
+  \textbf{Ms.\ Madhuri Malpathak}\\
+  \textbf{Associate Director- Central Operations \& CoE}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.38\textwidth}
+  \raggedleft\vspace{0pt}
+  \begin{minipage}[t][1.4cm][b]{\linewidth}
+  \raggedleft\vspace{0pt}
+  \BLOCK{if Onb_Mgr_Declaration_Signature}%
+  \raggedleft\vspace{0pt}
+  \includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
+  \BLOCK{endif}%
+  \end{minipage}\\[2pt]
+  Accepted By\\[0cm]
+  \textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}
+\end{minipage}
+
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  PAGE 2 — FIXED TERM CONTRACT (clauses 1–7a)
+% ═════════════════════════════════════════════════════════════════════════════
+\mpheader
+
+\vspace{0.5cm}
+
+\begin{center}
+  \textbf{FIXED TERM CONTRACT OF SERVICE}\\[4pt]
+  \textbf{Temporary Staff}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}, itemsep=4pt]
+
+\item This made between \textbf{ManpowerGroup Services India Pvt.~Ltd., (``ManpowerGroup'')} and
+\textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}} (``Temporary Staff'') engagement:
+
+\item \textbf{Engagement}\\[2pt]
+The Temporary Staff is engaged by ManpowerGroup to perform specific fixed term work assignments
+(``Assignment'') for ManpowerGroup customers (``Customer'') under the terms and conditions of
+this Agreement and the Schedule A attached hereto for each new Assignment.
+
+\item \textbf{The Contract}
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=3pt, topsep=2pt]
+  \item This agreement including Schedule A constitutes a fixed term contract of service between
+        ManpowerGroup and the Temporary Staff and they govern each Assignment undertaken by the
+        Temporary Staff. Upon acceptance of each Assignment by the Temporary Staff, ManpowerGroup
+        and the Temporary Staff shall complete and sign Schedule A. The Temporary Staff is expected to complete the Assignment once accepted.
+  \item No variation or alteration of these Terms shall be valid unless approved by ManpowerGroup in
+        writing.
+  \item Fixed Term Contract of Service means and includes only Temporary Service.
+\end{enumerate}
+
+\item The Temporary Staff acknowledges that it is the nature of contract work that there may be periods
+when no suitable work is available and agrees that:
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=3pt, topsep=2pt]
+  \item Suitability shall be determined solely by ManpowerGroup.
+  \item ManpowerGroup shall incur no liability towards the Temporary Staff should it fail to offer any
+        Assignment at any point in time and failure to provide the Assignment will lead to automatic
+        termination of the Temporary Staff.
+\end{enumerate}
+
+\item \begin{enumerate}[label=\textbf{(\alph*)}, itemsep=3pt, topsep=2pt]
+  \item  ManpowerGroup shall pay the Temporary Staff remuneration calculated at an agreed rate for
+each period worked during an Assignment, to be paid or monthly in arrears subject to
+deductions for the purpose of Provident Fund and any other Statutory deductions which
+ManpowerGroup may be bound by any laws or regulations to make. In addition,
+ManpowerGroup shall be entitled at any time to make deductions from the Temporary Staff's
+remuneration in respect of sums due from the Temporary Staff to ManpowerGroup in relation to
+any overpayment of any kind or any other debt.
+
+  \item  For all allowances paid requiring receipts for evidentiary purposes, the candidate is required to
+issue true and original documents to this office with the timesheet at the end of each month.
+Failure to do so will result in adjustments in your tax.
+
+\end{enumerate}
+
+\item It is clarified that the Temporary Employee would not be entitled for any Wages or Leave during
+the period he/she has not taken any Assignment.
+
+\item The Temporary Staff is not obliged to accept any Assignment offered by ManpowerGroup, but if he
+does so, during every Assignment and afterwards, as appropriate and as directed, he will:
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=3pt, topsep=2pt]
+  \item Co-operate with Customer's staff and accept the direct supervision and instruction of any
+        responsible person in the Customer's organization as to the services to be performed during
+        an Assignment.
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  PAGE 3 — FIXED TERM CONTRACT (clauses 7b–11)
+% ═════════════════════════════════════════════════════════════════════════════
+\mpheader
+
+\vspace{0.4cm}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}, itemsep=4pt, start=7]
+
+\item[]
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=3pt, topsep=0pt, start=2]
+  \item Observe any rules and regulations of the Customer's establishment to which attention has
+        been drawn or which the Temporary Staff might reasonably be expected to ascertain.
+  \item Unless arrangements are made to the contrary, conform to the normal hours of work currently
+        in force at Customer's establishment or such other hours as the Customer may require.
+  \item Not engage in any conduct detrimental to the interests of Customer or ManpowerGroup. Take
+        all reasonable steps to safeguard his own safety and safety of any other person who may be
+        present or affected by his actions on the Assignment and comply with the health and safety
+        policies of Customer.
+  \item Not to claim any compensation or to receive any payments of any nature whatsoever from the
+        customer due to the Assignment, unless expressly consented to by ManpowerGroup.
+  \item In the event of the place of Assignment or the client getting changed, or for any reason
+        whatsoever ManpowerGroup reserves the right to relocate the Temporary Staff at any other
+        suitable location for undertaking the assignment and in such case, no additional remuneration
+        or extra payment other than the remuneration payable as per the Contract of Temporary
+        Service shall become payable subject to the condition that the Temporary Staff joins at the
+        new location / Assignment and completes the assignment.
+\end{enumerate}
+
+\setcounter{enumi}{7}
+\item At the end of each work record period, (or at the end of an Assignment where an Assignment is
+for a period of less than the work record period or is completed before the work record period)
+the Temporary Staff shall deliver to ManpowerGroup his time sheet, duly completed to indicate
+the number of hours worked during the preceding period and signed by an authorized
+representative of Customer. ManpowerGroup shall not be obliged to make any payment to the
+Temporary Staff unless a properly authenticated time sheet has been submitted.
+
+\item Due to the nature of the temporary work, ManpowerGroup may without notice and without
+liability or for any reason whatsoever terminate the assignment/ fixed term contract at any time and
+Temporary Staff shall have no claims whatsoever against ManpowerGroup or the customer. apart
+from receiving the remuneration for services rendered till the date of termination either in writing or
+verbal communication and he/ she shall not been titled to or make any claim for any other
+compensation against ManpowerGroup or Customer.
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=3pt, topsep=2pt]
+  \item If for any reason, the client to whom the Temporary Staff is deputed stops paying for any reason
+        irrespective of the period of assignment as a special case the temporary staff will be given one
+        days notice with relevant pay till the date on which Temporary Staff attended duty at Clients
+        place.
+  \item At any rate the liability of ManpowerGroup in the event of further threat or claim and / or / by
+        Court action by dissatisfied Temporary staff making any claim otherwise shall on no account exceed
+        one months / net remuneration last paid to Temporary Staff which will be solely payable at the
+        discretion of ManpowerGroup.
+\end{enumerate}
+
+\item If the Temporary Staff is unable for any reason to work on an Assignment, he should inform
+ManpowerGroup as soon as possible, but no later than 9.30am on the first day of absence, to
+enable alternative arrangements to be made.
+
+\end{enumerate}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  PAGE 4 — FIXED TERM CONTRACT (clauses 12–17)
+% ═════════════════════════════════════════════════════════════════════════════
+\mpheader
+
+\vspace{0.4cm}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}, itemsep=4pt, start=11]
+
+\item The Temporary Staff shall keep confidential and will not at any time divulge to any person, nor use
+for his own or a third party's benefit, any information of whatever nature including but not limited to
+employment, business affairs, transactions or finances in relation to ManpowerGroup or the
+Customer.
+
+\item \textbf{On termination of an Assignment:}
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=3pt, topsep=2pt]
+  \item The Temporary Staff shall immediately deliver to ManpowerGroup all correspondence,
+        documents, specifications, papers and property belonging to ManpowerGroup or Customer,
+        which may be in his possession or under his control.
+  \item Temporary Staff agrees to provide ManpowerGroup with notice for termination or pay salary
+        in lieu of notice should the Temporary Staff decide to end an Assignment earlier than the agreed
+        duration.
+\end{enumerate}
+
+The notice period for termination shall be in accordance with the following schedule:
+
+\vspace{0.2cm}
+\noindent\hspace{1.5em}
+\begin{tabular}{@{}p{5.5cm}p{4cm}@{}}
+  \textbf{Duration of Assignment} & \textbf{Notice Period} \\[3pt]
+  2 weeks or less                 & 3 days \\
+  > 2 weeks to 1 month            & 1 week \\
+  1 month to 6 months             & 2 weeks \\
+  > 6 months                      & 1 month \\
+\end{tabular}
+\vspace{0.2cm}
+
+\item For any service of notice or communication of whatsoever kind, you will be informed by courier or
+ordinary post at the address given by you at the time of your employment. In case of any change in
+your address, surname after marriage in case of female or any other change, you will inform the
+management in writing to this effect within one week of such change and get new address
+recorded in your personal record.
+
+\item The offer for Employment by ManpowerGroup is founded on the Declaration provided by
+Temporary Staff in respect of the following:
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=3pt, topsep=2pt]
+  \item Information / detail/s provided by Temporary Staff to ManpowerGroup and in his/her resume
+        which is taken as correct especially the information pertaining to age, educational qualifications,
+        experience marital status and previous employment.
+  \item If relieving letter of previous employer is not provided / submitted, the offer and acceptance is
+        subject to production of relieving letter within the time granted by ManpowerGroup.
+\end{enumerate}
+
+\item In the event of any discovery / information made known to or available with ManpowerGroup with
+reference to any fraud, mis-statement, incorrect particulars or misinformation or suppression of
+any detail / material fact on any account leading to the mistaken offer of fixed term contract of service
+having been made / acted upon by ManpowerGroup the Contract of Temporary Service shall stand
+automatically terminated with / without any reference / notice to Temporary Staff with retrospective
+effect from the date of offer and making Temporary Staff liable to make good all losses, expenses,
+damages caused to ManpowerGroup apart from Temporary compensating the actual loss suffered
+by them on account of such act/s.
+
+\end{enumerate}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  PAGE 5 — FIXED TERM CONTRACT (clauses 18–19 + signatures)
+% ═════════════════════════════════════════════════════════════════════════════
+\mpheader
+
+\vspace{0.4cm}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}, itemsep=4pt, start=16]
+
+\item In the event of Temporary Staff not producing the relieving letter from his / her previous employer [if
+applicable] within the stipulated time or due to any indulgence granted by ManpowerGroup the
+Contract of Temporary Service shall stand automatically terminated with / without any reference /
+notice to Temporary Staff with retrospective effect from the date of offer and making Temporary
+Staff liable to make good all losses, expenses, damages caused to ManpowerGroup apart from
+Temporary Staff compensating the actual loss suffered by them on account of such act/s.
+
+\item This Agreement shall be governed by and construed in accordance with the laws of India and the
+relevant State Govt and all disputes shall be subject to New Delhi Courts Jurisdiction.
+
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\noindent\textbf{I CONFIRM THAT I HAVE CAREFULLY READ THROUGH AND UNDERSTOOD ALL THE ABOVE TERMS AND
+CONDITIONS OF ENGAGEMENT HEREIN AND I UNDERTAKE TO ABIDE BY THE SAID TERMS AND
+CONDITIONS.}
+
+\vspace{0.8cm}
+
+
+\noindent
+\begin{minipage}[t]{0.55\textwidth}
+  \vspace{0pt}
+  For \textbf{ManpowerGroup Services India Private Limited}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.38\textwidth}
+  \raggedleft\vspace{0pt}
+  \textbf{Signature}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\noindent
+\begin{minipage}[t]{0.55\textwidth}
+  \vspace{0pt}
+  \begin{minipage}[t][1.4cm][b]{\linewidth}
+  \BLOCK{if default_signatory_for_letter}%
+  \includegraphics[width=2.5cm,height=2cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+  \BLOCK{endif}%
+  \end{minipage}\\[2pt]
+  \textbf{Ms.\ Madhuri Malpathak}\\
+  \textbf{Associate Director- Central Operations \& CoE}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.38\textwidth}
+  \raggedleft\vspace{0pt}
+  \begin{minipage}[t][1.4cm][b]{\linewidth}
+  \raggedleft\vspace{0pt}
+  \BLOCK{if Onb_Mgr_Declaration_Signature}%
+  \raggedleft\vspace{0pt}
+  \includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
+  \BLOCK{endif}%
+  \end{minipage}\\[2pt]
+  Accepted By\\[0cm]
+  \textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}
+\end{minipage}
+
+
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  PAGE 6 — SCHEDULE A
+% ═════════════════════════════════════════════════════════════════════════════
+\mpheader
+
+\vspace{0.4cm}
+
+\begin{center}
+  \textbf{Schedule A}
+\end{center}
+
+\vspace{0.2cm}
+
+\noindent\textbf{Assignment Details:}
+
+\vspace{0.2cm}
+
+\noindent
+\begin{tabular}{@{}p{4.5cm}@{}l@{}}
+  Customer                 & : \textbf{\VAR{Requirement_Client_Name}}    \\[4pt]
+  Place of Assignment      & : \textbf{\makefirstuc{\VAR{Offered_Location_City}}}      \\[4pt]
+  Start date of Assignment & : \textbf{\VAR{Offer_Contract_Start_Date}}  \\[4pt]
+  End date of Assignment   & : \textbf{\VAR{Offer_Contract_End_Date}}    \\
+\end{tabular}
+
+\vspace{0.4cm}
+
+\noindent\textbf{Salary Break-up}
+
+\vspace{0.2cm}
+
+\renewcommand{\arraystretch}{1.25}
+\arrayrulecolor{black}
+\renewcommand{\arrayrulewidth}{0.8pt}
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+\BLOCK{set GrossSalaryItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Gross Salary') | first}%
+\begin{center}
+\begin{tabular}{|p{8.5cm}|>{\raggedleft\arraybackslash}p{6.5cm}|}
+\hhline{|-|-|}
+\textbf{Salary Header} & \multicolumn{1}{r|}{\textbf{Amount}} \\
+\hhline{|-|-|}
+\BLOCK{for item in EarningHeadersTable}
+\BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\hhline{|-|-|}
+\cellcolor{yellow!40}\textbf{Total CTC} & \cellcolor{yellow!40}\textbf{\VAR{TotalItem.column1Value}} \\
+\hhline{|-|-|}
+\cellcolor{yellow!40}\textbf{Gross Salary} & \cellcolor{yellow!40}\textbf{\VAR{GrossSalaryItem.column1Value}} \\
+\hhline{|-|-|}
+\textbf{\underline{for Employee}} & \\
+\hline
+\BLOCK{for item in DeductionHeadersTable}
+\BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\hhline{|-|-|}
+\cellcolor{yellow!40}\textbf{TAKE HOME} & \cellcolor{yellow!40}\textbf{\VAR{TakeHomeItem.column1Value}} \\
+\hhline{|-|-|}
+\end{tabular}
+\end{center}
+
+
+\vspace{0.3cm}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  PAGE 7 — Labour Welfare Fund, Income Tax, Professional Tax and Signatures
+% ═════════════════════════════════════════════════════════════════════════════
+\mpheader
+
+\vspace{0.4cm}
+
+\noindent * Labor Welfare Fund (Rs.~25) will be deducted from employee's salary as per state
+Government norms and applicability period.
+
+\noindent * Labor Welfare Fund (Rs.~75) towards employer's contribution as per state Government norms
+and applicability period.
+
+\noindent * Income tax and Professional tax as applicable will be deducted. All taxes will be deducted as
+applicable by law. Your salary is strictly confidential.
+
+\vspace{2 cm}
+
+\noindent
+\begin{minipage}[t]{0.55\textwidth}
+  \vspace{0pt}
+  For \textbf{ManpowerGroup Services India Private Limited}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.38\textwidth}
+  \raggedleft\vspace{0pt}
+  \textbf{Signature}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\noindent
+\begin{minipage}[t]{0.55\textwidth}
+  \vspace{0pt}
+  \begin{minipage}[t][1.4cm][b]{\linewidth}
+  \BLOCK{if default_signatory_for_letter}%
+  \includegraphics[width=2.5cm,height=2cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+  \BLOCK{endif}%
+  \end{minipage}\\[2pt]
+  \textbf{Ms.\ Madhuri Malpathak}\\
+  \textbf{Associate Director- Central Operations \& CoE}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.38\textwidth}
+  \raggedleft\vspace{0pt}
+  \begin{minipage}[t][1.4cm][b]{\linewidth}
+  \raggedleft\vspace{0pt}
+  \BLOCK{if Onb_Mgr_Declaration_Signature}%
+  \raggedleft\vspace{0pt}
+  \includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
+  \BLOCK{endif}%
+  \end{minipage}\\[2pt]
+  Accepted By\\[0cm]
+  \textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}
+\end{minipage}
+
+\vspace{0.3cm}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  PAGE 8 — Declaration
+% ═════════════════════════════════════════════════════════════════════════════
+\mpheader
+
+\vspace{0.4cm}
+\begin{center}
+  \textbf{Declaration}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}, itemsep=6pt]
+
+\item I declare and clearly understand that the offer for Temporary Employment by ManpowerGroup is
+founded on the Declaration provided by me in respect of the following:
+\begin{enumerate}[label=\textbf{(\alph*).}, itemsep=3pt, topsep=3pt]
+  \item Information/detail/s provided by me to ManpowerGroup and in my resume which is taken as
+        correct by ManpowerGroup especially the information pertaining to age, educational
+        qualifications, experience marital status and previous employment and my being a Major.
+  \item If relieving letter of previous employer is not provided / submitted, the offer and acceptance is
+        subject to production of relieving letter within the time granted by ManpowerGroup.
+\end{enumerate}
+
+\item I further declare that in the event of any discovery / information made known to or available with
+ManpowerGroup with reference to any fraud, mis-statement, incorrect particulars or misinformation
+or suppression of any detail / material fact on any account leading to the mistaken offer of fixed
+term contract of service having been made / acted upon by ManpowerGroup the Contract of
+Temporary Service shall stand automatically terminated with/without any reference/notice to me
+with retrospective effect from the date of offer and making me liable to make good all losses,
+expenses, damages caused to ManpowerGroup apart from my compensating the actual loss
+suffered by them on account of such act/s.
+
+\item I further declare that in the event of my not producing the relieving letter from my previous Employer
+[if applicable] within the stipulated time or due to any indulgence granted by ManpowerGroup, the
+Contract of Temporary Service shall stand automatically terminated with/without any reference /
+notice to me with retrospective effect from the date of offer and making Temporary Staff liable to
+make good all losses, expenses, damages caused to ManpowerGroup apart from my compensating
+the actual loss suffered by them on account of such act/s.
+
+\item I have clearly understood that due to the nature of the temporary work, ManpowerGroup may
+without notice and without liability or for any reason whatsoever terminate the assignment / fixed
+term contract at any time and I shall have no claim whatsoever against ManpowerGroup or the
+Customer. Apart from receiving the remuneration for services rendered till the date of termination
+either in writing or verbal communication and I shall not be entitled to or make any claim for any
+other compensation against ManpowerGroup or Customer.
+
+\end{enumerate}
+
+\vspace{2 cm}
+
+\noindent
+\BLOCK{if Onb_Mgr_Declaration_Signature}%
+\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}\\[0.1cm]
+\BLOCK{endif}%
+\textbf{Signature}\\[0.2cm]
+Accepted By\\[0.1cm]
+\textbf{\VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}}
+
+\end{document}
