@@ -1,0 +1,190 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper, top=8mm, bottom=14mm, left=18mm, right=18mm, headheight=4.0cm, headsep=8mm, includehead]{geometry}
+\usepackage{fontspec}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{parskip}
+\usepackage[normalem]{ulem}
+\usepackage[table]{xcolor}
+\setlength{\arrayrulewidth}{0.8pt}   % thicker borders (important)
+\setlength{\tabcolsep}{6pt}          % optional spacing control
+
+\setmainfont{Arial}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{4pt}
+
+\newcommand{\mpheadercontent}{%
+  \begin{minipage}[t]{0.58\textwidth}
+    \raggedright\vspace{0pt}%
+    {\small ManpowerGroup Services India Pvt. Ltd.}\\[-1pt]
+    {\small Office No.103, Spectra Building,}\\[-1pt]
+    {\small Hiranandani Business Park,}\\[-1pt]
+    {\small Hiranandani Garden,}\\[-1pt]
+    {\small Mumbai-400076.}\\[4pt]
+    {\small Support:1800-419-4001}\\[-1pt]
+    {\small www.manpoweronline.}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.36\textwidth}
+    \raggedleft\vspace{0pt}%
+    \BLOCK{if logo_path}%
+    \includegraphics[width=4.8cm]{\VAR{logo_path}}%
+    \BLOCK{endif}%
+  \end{minipage}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\mpheadercontent}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\sealimg}{%
+\BLOCK{if default_signatory_for_letter}%
+\includegraphics[height=1.6cm,keepaspectratio]{\VAR{default_signatory_for_letter}}%
+\BLOCK{endif}%
+}
+
+\newcommand{\candsig}{\VAR{Onb_Mgr_Declaration_Signature}}
+
+\begin{document}
+
+\noindent\textbf{Name: \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name},}
+
+\vspace{0.3cm}
+
+\noindent\textbf{Subject: } Offer Letter for Fixed Term Contract Assignment
+
+\vspace{0.3cm}
+
+\noindent\textbf{Dear \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name},}
+
+\vspace{0.3cm}
+With reference to your selection with ManpowerGroup Services India Pvt.\ Ltd.\ for the position of
+\textbf{\VAR{DesignationTitle} Deputed At -- Telamon Technologies India LLP (hereby referred to as ``TTI'')} on a fixed term contract basis, we are pleased to offer you as below.
+
+\vspace{0.4cm}
+
+\noindent
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\begin{tabular}{@{}p{5.2cm}p{1cm}l@{}}
+  \textbf{Start date of Assignment} & \textbf{:} & \textbf{\VAR{Offer_Contract_Start_Date}} \\[9pt]
+  \textbf{End date of Assignment}   & \textbf{:} & \textbf{\VAR{Offer_Contract_End_Date}}   \\[9pt]
+  \textbf{Monthly CTC}              & \textbf{:} & \textbf{Rs.\ \VAR{TotalItem.column1Value}/-PM} \\
+\end{tabular}
+
+\vspace{0.3cm}
+
+Any statutory dues like PF, ESI, Bonus etc., if applicable, will be Paid / Deducted as per law. All taxes will be deducted as applicable by law.
+
+\vspace{0.3cm}
+
+Appointment letter and other terms and conditions of the contract would be provided after your first salary processed with Manpower.
+
+\vspace{0.3cm}
+
+Kindly send the signed and accepted duplicate copy of the offer letter within 2 days, failing which it will be treated that this offer stands withdrawn automatically.
+
+\vspace{0.3cm}
+
+\noindent
+1. The duration of `minimum notice period' from contractual staff side to the \textbf{TTI} shall be read as:
+
+\textbf{\begin{enumerate}
+    \renewcommand{\labelenumi}{\alph{enumi}.}
+    \item 15 (fifteen) days during the first month of service and,
+    \item 60 (sixty) days after completion of one month with TTI.
+\end{enumerate}}
+
+\vspace{0.6cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedright\vspace{0pt}
+  \textbf{For ManpowerGroup Services India Pvt. Ltd.}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedleft\vspace{0pt}
+  \textbf{Signature}
+\end{minipage}
+
+\vspace{0.1cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedright\vspace{0pt}
+  \sealimg\\[2pt]
+  % \textbf{MADHURI MALPATHAK}\\[-1pt]
+  % {\small Associate Director- Staffing Operations \& CoE}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedleft\vspace{0pt}
+  \candsig
+\end{minipage}
+
+\vspace{0.25cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedright\vspace{0pt}
+  \textbf{Authorized Signature}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \raggedleft\vspace{0pt}
+  \textbf{Accepted by}\\
+  \VAR{Offer_First_Name} \VAR{Offer_Mgr_Middle_Name} \VAR{Offer_Last_Name}
+\end{minipage}
+\newpage
+
+\vspace*{0.3cm}
+
+\begin{center}
+\Large\textbf{\uline{Annexure}}
+\end{center}
+
+
+\vspace{0.3cm}
+
+\renewcommand{\arraystretch}{1.25}
+\BLOCK{set TotalItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Offered CTC') | first}%
+\BLOCK{set TakeHomeItem = breakUpData | selectattr('SalaryHeaderTitle', 'equalto', 'Take Home Salary') | first}%
+\begin{center}
+\begin{tabular}{|p{8.5cm}|>{\raggedleft\arraybackslash}p{6.5cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Salary Structure}} \\
+\hline
+\textbf{\underline{Particulars}} & \multicolumn{1}{c|}{\textbf{\underline{Amount (Rs.)}}} \\
+\hline
+\BLOCK{for item in EarningHeadersTable}
+\BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\cellcolor{yellow!60}\textbf{Total CTC} & \cellcolor{yellow!60}\textbf{\VAR{TotalItem.column1Value}} \\
+\hline
+\textbf{\underline{for Employee}} & \\
+\hline
+\BLOCK{for item in DeductionHeadersTable}
+\BLOCK{if item.column1Value != 'NaN' and item.column1Value != '0'}
+\VAR{item.SalaryHeaderTitle} & \VAR{item.column1Value} \\
+\hline
+\BLOCK{endif}
+\BLOCK{endfor}
+\cellcolor{yellow!60}\textbf{TAKE HOME} & \cellcolor{yellow!60}\textbf{\VAR{TakeHomeItem.column1Value}} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.6cm}
+
+\end{document}
