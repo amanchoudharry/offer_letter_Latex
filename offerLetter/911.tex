@@ -31,14 +31,14 @@
   \begin{minipage}[t]{0.30\textwidth}
     \raggedleft\vspace{0pt}%
     \BLOCK{if logo_path}%
-    \includegraphics[width=2.6cm]{\VAR{logo_path}}%
+    \includegraphics[width=4.8cm]{\VAR{logo_path}}%
     \BLOCK{endif}%
   \end{minipage}%
 }
  
 \newcommand{\mpfootercontent}{%
   \footnotesize\centering
-  \textbf{Regd Office:}Suit No A-1A, 1\textsuperscript{st} Floor, Gobind Mansion, H-Block,,Indra Palace, Connaught Circus,New Delhi -- 110001\\
+  \textbf{Regd Office:}Suit No A-1A, 1\textsuperscript{st} Floor, Gobind Mansion, H-Block,Indra Palace, Connaught Circus,New Delhi -- 110001\\
   CIN -- U74910DL 1997PTC085591%
 }
  
@@ -58,10 +58,8 @@
  
 % Candidate's accepted-signature image (placeholder token if none)
 \newcommand{\candsigimg}{%
-\BLOCK{if Onb_Mgr_Declaration_Signature }%
-\includegraphics[height=1.4cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
-\BLOCK{else}%
-Offer\_Accepted\_Signature%
+\BLOCK{if Onb_Mgr_Declaration_Signature}%
+\includegraphics[height=2cm,keepaspectratio]{\VAR{Onb_Mgr_Declaration_Signature}}%
 \BLOCK{endif}%
 }
  
@@ -70,10 +68,10 @@ Offer\_Accepted\_Signature%
 \noindent
 \begin{minipage}[t]{0.55\textwidth}
   \raggedright\vspace{0pt}%
-  For ManpowerGroup Services India Pvt.\ Ltd.\\[2pt]
+  \textbf{For ManpowerGroup Services India Pvt.\ Ltd.}\\[2pt]
   \sealimg\\[2pt]
   \textbf{MADHURI MALPATHAK}\\
-  Associate Director- Staffing Operations \& CoE
+  \textbf{Associate Director- Staffing Operations \& CoE}
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{0.40\textwidth}
@@ -163,8 +161,6 @@ reserve their right to treat this offer as withdrawn automatically without furth
 \begin{center}
 \begin{tabular}{|p{5.5cm}|>{\raggedleft\arraybackslash}p{4.75cm}|>{\raggedleft\arraybackslash}p{4.75cm}|}
 \hline
-\multicolumn{3}{|c|}{\textbf{Salary Structure}} \\
-\hline
 \textbf{\underline{Particulars}} & \multicolumn{1}{c|}{\textbf{\underline{Monthly Amount (Rs.)}}} & \multicolumn{1}{c|}{\textbf{\underline{Annually Amount (Rs.)}}} \\
 \hline
 \BLOCK{for item in EarningHeadersTable}
@@ -173,7 +169,7 @@ reserve their right to treat this offer as withdrawn automatically without furth
 \hline
 \BLOCK{endif}
 \BLOCK{endfor}
-\cellcolor{yellow!60}\textbf{Total CTC} & \cellcolor{yellow!60}\textbf{\VAR{TotalItem.column1Value}} & \cellcolor{yellow!60}\textbf{\VAR{TotalItem.column2Value}} \\
+\cellcolor{yellow!40}\textbf{Total CTC} & \cellcolor{yellow!40}\textbf{\VAR{TotalItem.column1Value}} & \cellcolor{yellow!40}\textbf{\VAR{TotalItem.column2Value}} \\
 \hline
 \textbf{\underline{for Employee}} & & \\
 \hline
@@ -183,7 +179,7 @@ reserve their right to treat this offer as withdrawn automatically without furth
 \hline
 \BLOCK{endif}
 \BLOCK{endfor}
-\cellcolor{yellow!60}\textbf{TAKE HOME} & \cellcolor{yellow!60}\textbf{\VAR{TakeHomeItem.column1Value}} & \cellcolor{yellow!60}\textbf{\VAR{TakeHomeItem.column2Value}} \\
+\cellcolor{yellow!40}\textbf{TAKE HOME} & \cellcolor{yellow!40}\textbf{\VAR{TakeHomeItem.column1Value}} & \cellcolor{yellow!40}\textbf{\VAR{TakeHomeItem.column2Value}} \\
 \hline
 \end{tabular}
 \end{center}
